@@ -1,0 +1,226 @@
+
+
+/*
+body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    text-align: center;
+    font: 10px 'Lucida Grande', Geneva, Arial, Verdana, sans-serif;
+    color: #000;}
+
+*/
+
+
+
+/* FIXED WIDTH BOX*/
+.box {
+    width:207px;
+    line-height:1.5;
+    margin-top:20px;
+    color:#333;
+    text-align:left;
+    font: 10px 'Lucida Grande', Geneva, Verdana, Arial, sans-serif;}
+
+.box p{
+    text-align:left;
+    font: 10px 'Lucida Grande', Geneva, Verdana, Arial, sans-serif;}
+.box td.standard{
+    text-align:left;
+    font: 10px 'Lucida Grande', Geneva, Verdana, Arial, sans-serif;}
+.box h2 {
+    font-size: 13px;
+    margin: 0;}
+.box h3 {
+    font-size: 12px;
+    margin: 0;}
+.box h4 {
+    font-size: 10px;
+    margin: 0;}
+.box div {
+    background:url(images/sidebarframetop20060807.gif) top left no-repeat;
+    padding:14px 0 0 0;
+    margin-bottom:4px;}
+.box div * {
+    padding-left:18px;
+    padding-right:18px;}
+.box div * * {
+    padding-left:0px;
+    padding-right:0px;}
+
+.box div ul, .box div ul.square, .box div ol { padding-left:35px; }
+.box div h3 { margin-bottom:8px; }*/
+.box div h3.subhead { margin-bottom:0px; }
+.box div h2 { margin-bottom:0px;}*/
+.box div img.right { margin-left:6px; position:relative; }
+.box div img.left { margin-right:6px; position:relative; }
+
+.box div .last {
+    background:url(images/sidebarframebottom20060807.gif) 0 100% no-repeat;
+    padding-bottom:18px;
+    padding-left:18px;
+    padding-right:18px;
+}
+
+.box div div { background-image:none; }
+
+
+/* IE IMAGE FIXES */
+* html .box div img.right { padding:0; margin-right:18px; }
+
+
+
+
+
+
+/* NON-FIXED WIDTH BOX*/
+.container {
+    border: 1px solid #CCCCCC;
+    width:50%;
+    margin-top:25px;
+    text-align:left;
+    font: 10px 'Lucida Grande', Geneva, Verdana, Arial, sans-serif;
+    padding-left:5px;
+    padding-right:5px;
+    padding-top:25px;
+    padding-bottom:25px;
+    background:#F1F3F5;
+}
+
+.container div div {
+    width:100%;
+}
+
+
+
+
+
+
+/* SEARCH REULTS TABLE */
+
+.searchResults{
+    width:100%;
+    /*border:1px solid;*/
+    /*border-left: 2px solid #EEEEEE;*/
+    /*border-top: 2px solid #EEEEEE;*/
+    /*border-right: 2px solid #AAAAAA;*/
+    /*border-bottom: 2px solid #AAAAAA;*/
+    margin-top:15px;
+    background-color:#FFFFFF;
+    font: 11px 'Lucida Grande', Geneva, Arial, Verdana, sans-serif;
+}
+
+.searchResults td{
+    padding:3px;
+}
+
+.searchResultsRowOdd{
+    background-color:lavender;
+}
+
+.searchResultsRowEven{
+    background: #FFFFFF;
+}
+
+.searchResultsDescription {
+    color:#666666;
+}
+.searchResultsDate{
+    color:#000000;
+    text-align:right;
+}
+
+a.searchResultsUrl{
+
+}
+a.searchResultsUrl:hover{
+    text-decoration:underline;
+}
+
+
+
+.page {
+    clear:both;
+}
+
+
+
+
+/* MENU */
+
+#chromemenu{
+    width: 100%;
+    font-weight: bold;
+    /*font-size: 90%;*/
+}
+
+#chromemenu:after{ /*Add margin between menu and rest of content in Firefox*/
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+#chromemenu ul{
+    border: 1px solid #BBB;
+    border-right:none;
+    border-left:none;
+    width: 100%;
+    background: url(images/chromebg.gif) center center repeat-x;
+    padding: 5px 0;
+    margin: 0;
+    text-align: center; /*set value to "right" for example to align menu to the left of page*/
+}
+
+#chromemenu ul li{
+    display: inline;
+}
+
+#chromemenu ul li a{
+    color: #494949;
+    padding: 5px;
+    margin: 0;
+    text-decoration: none;
+    border-right: 1px solid #DADADA;
+}
+
+#chromemenu ul li a:hover{
+    background: url(images/chromebg2.gif) center center repeat-x;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

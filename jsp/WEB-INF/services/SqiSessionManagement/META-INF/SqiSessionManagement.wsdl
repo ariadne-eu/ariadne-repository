@@ -1,0 +1,223 @@
+<wsdl:definitions xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:types="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+                  xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns="http://schemas.xmlsoap.org/wsdl/"
+                  targetNamespace="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0">
+    <wsdl:documentation>SqiSessionManagement</wsdl:documentation>
+    <wsdl:types>
+        <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified"
+                    targetNamespace="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0">
+            <xsd:element name="createSession">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="userID" type="xsd:string"/>
+                        <xsd:element name="password" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createSessionResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="createSessionReturn" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createAnonymousSession">
+                <xsd:complexType>
+                    <xsd:sequence/>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createAnonymousSessionResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="createAnonymousSessionReturn" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="destroySession">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="sessionID" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+        <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified"
+                    targetNamespace="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0">
+            <xsd:simpleType name="faultCodeType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="SQI_00000"/>
+                    <xsd:enumeration value="SQI_00001"/>
+                    <xsd:enumeration value="SQI_00002"/>
+                    <xsd:enumeration value="SQI_00003"/>
+                    <xsd:enumeration value="SQI_00004"/>
+                    <xsd:enumeration value="SQI_00005"/>
+                    <xsd:enumeration value="SQI_00006"/>
+                    <xsd:enumeration value="SQI_00007"/>
+                    <xsd:enumeration value="SQI_00008"/>
+                    <xsd:enumeration value="SQI_00009"/>
+                    <xsd:enumeration value="SQI_00010"/>
+                    <xsd:enumeration value="SQI_00011"/>
+                    <xsd:enumeration value="SQI_00012"/>
+                    <xsd:enumeration value="SQI_00013"/>
+                    <xsd:enumeration value="SQI_00014"/>
+                    <xsd:enumeration value="SQI_00015"/>
+                    <xsd:enumeration value="SQI_00016"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:element name="_SQIFault">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="sqiFaultCode" type="types:faultCodeType"/>
+                        <xsd:element name="message" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="createSessionRequest">
+        <wsdl:part name="part1" element="types:createSession"/>
+    </wsdl:message>
+    <wsdl:message name="createSessionResponse">
+        <wsdl:part name="part1" element="types:createSessionResponse"/>
+    </wsdl:message>
+    <wsdl:message name="_SQIFault">
+        <wsdl:part name="part1" element="types:_SQIFault"/>
+    </wsdl:message>
+    <wsdl:message name="destroySessionRequest">
+        <wsdl:part name="part1" element="types:destroySession"/>
+    </wsdl:message>
+    <wsdl:message name="destroySessionResponse"/>
+    <wsdl:message name="createAnonymousSessionRequest">
+        <wsdl:part name="part1" element="types:createAnonymousSession"/>
+    </wsdl:message>
+    <wsdl:message name="createAnonymousSessionResponse">
+        <wsdl:part name="part1" element="types:createAnonymousSessionResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="SqiSessionManagementPortType">
+        <wsdl:operation name="createSession">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:createSessionRequest"
+                        wsaw:Action="createSession"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:createSessionResponse"
+                         wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiSessionManagementPort:createSessionResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:_SQIFault"
+                        name="_SQIFault"
+                        wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiSessionManagementPort:createSession:Fault:_SQIFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="destroySession">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:destroySessionRequest"
+                        wsaw:Action="destroySession"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:destroySessionResponse"
+                         wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiSessionManagementPort:destroySessionResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:_SQIFault"
+                        name="_SQIFault"
+                        wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiSessionManagementPort:destroySession:Fault:_SQIFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="createAnonymousSession">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                        message="types:createAnonymousSessionRequest" wsaw:Action="createAnonymousSession"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                         message="types:createAnonymousSessionResponse"
+                         wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiSessionManagementPort:createAnonymousSessionResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:_SQIFault"
+                        name="_SQIFault"
+                        wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiSessionManagementPort:createAnonymousSession:Fault:_SQIFault"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SqiSessionManagementSOAP11Binding"
+                  type="types:SqiSessionManagementPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="createSession">
+            <soap:operation soapAction="createSession" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="destroySession">
+            <soap:operation soapAction="destroySession" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="createAnonymousSession">
+            <soap:operation soapAction="createAnonymousSession" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="SqiSessionManagementSOAP12Binding"
+                  type="types:SqiSessionManagementPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="createSession">
+            <soap12:operation soapAction="createSession" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap12:fault use="literal" name="_SQIFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="destroySession">
+            <soap12:operation soapAction="destroySession" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap12:fault use="literal" name="_SQIFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="createAnonymousSession">
+            <soap12:operation soapAction="createAnonymousSession" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap12:fault use="literal" name="_SQIFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="SqiSessionManagement">
+        <wsdl:port name="SqiSessionManagementSOAP11port"
+                   binding="types:SqiSessionManagementSOAP11Binding">
+            <soap:address location="http://localhost:8081/repository/services/SqiSessionManagement"/>
+        </wsdl:port>
+        <wsdl:port name="SqiSessionManagementSOAP12port"
+                   binding="types:SqiSessionManagementSOAP12Binding">
+            <soap12:address location="http://localhost:8081/repository/services/SqiSessionManagement"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

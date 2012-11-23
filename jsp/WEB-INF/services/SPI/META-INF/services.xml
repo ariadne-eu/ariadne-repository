@@ -1,0 +1,51 @@
+<serviceGroup>
+
+    <service name="SPI">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
+                             class="org.ariadne_eu.spi.SPIMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter locked="false" name="ServiceClass">org.ariadne_eu.service.SPIImplementation</parameter>
+        <operation name="deleteResource" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>deleteResource</actionMapping>
+            <outputActionMapping>urn:spi.ariadne-eu.org/interfaces/SPI:SPIServicePortType:deleteResourceResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="SpiFault">
+                urn:spi.ariadne-eu.org/interfaces/SPI:SPIServicePortType:deleteResource:Fault:SpiFault
+            </faultActionMapping>
+        </operation>
+        <operation name="deleteMetadataRecord" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>deleteMetadataRecord</actionMapping>
+            <outputActionMapping>urn:spi.ariadne-eu.org/interfaces/SPI:SPIServicePortType:deleteMetadataRecordResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="SpiFault">
+                urn:spi.ariadne-eu.org/interfaces/SPI:SPIServicePortType:deleteMetadataRecord:Fault:SpiFault
+            </faultActionMapping>
+        </operation>
+        <operation name="createIdentifier" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>createIdentifier</actionMapping>
+            <outputActionMapping>urn:spi.ariadne-eu.org/interfaces/SPI:SPIServicePortType:createIdentifierResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="SpiFault">
+                urn:spi.ariadne-eu.org/interfaces/SPI:SPIServicePortType:createIdentifier:Fault:SpiFault
+            </faultActionMapping>
+        </operation>
+        <operation name="submitResource" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>submitResource</actionMapping>
+            <outputActionMapping>urn:spi.ariadne-eu.org/interfaces/SPI:SPIServicePortType:submitResourceResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="SpiFault">
+                urn:spi.ariadne-eu.org/interfaces/SPI:SPIServicePortType:submitResource:Fault:SpiFault
+            </faultActionMapping>
+        </operation>
+        <operation name="submitMetadataRecord" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>submitMetadataRecord</actionMapping>
+            <outputActionMapping>urn:spi.ariadne-eu.org/interfaces/SPI:SPIServicePortType:submitMetadataRecordResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="SpiFault">
+                urn:spi.ariadne-eu.org/interfaces/SPI:SPIServicePortType:submitMetadataRecord:Fault:SpiFault
+            </faultActionMapping>
+        </operation>
+    </service>
+
+</serviceGroup>

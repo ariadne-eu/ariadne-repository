@@ -1,0 +1,51 @@
+<serviceGroup>
+
+    <service name="SPIDev">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
+                             class="org.ariadne_eu.spidev.SPIDevMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter locked="false" name="ServiceClass">org.ariadne_eu.service.SPIDevImplementation</parameter>
+        <operation name="deleteResource" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>deleteResource</actionMapping>
+            <outputActionMapping>urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:deleteResourceResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="SpiDevFault">
+                urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:deleteResource:Fault:SpiDevFault
+            </faultActionMapping>
+        </operation>
+        <operation name="deleteMetadataRecord" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>deleteMetadataRecord</actionMapping>
+            <outputActionMapping>urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:deleteMetadataRecordResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="SpiDevFault">
+                urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:deleteMetadataRecord:Fault:SpiDevFault
+            </faultActionMapping>
+        </operation>
+        <operation name="createIdentifier" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>createIdentifier</actionMapping>
+            <outputActionMapping>urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:createIdentifierResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="SpiDevFault">
+                urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:createIdentifier:Fault:SpiDevFault
+            </faultActionMapping>
+        </operation>
+        <operation name="submitResource" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>submitResource</actionMapping>
+            <outputActionMapping>urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:submitResourceResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="SpiDevFault">
+                urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:submitResource:Fault:SpiDevFault
+            </faultActionMapping>
+        </operation>
+        <operation name="submitMetadataRecord" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>submitMetadataRecord</actionMapping>
+            <outputActionMapping>urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:submitMetadataRecordResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="SpiDevFault">
+                urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:submitMetadataRecord:Fault:SpiDevFault
+            </faultActionMapping>
+        </operation>
+    </service>
+
+</serviceGroup>

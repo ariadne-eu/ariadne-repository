@@ -1,0 +1,499 @@
+<wsdl:definitions xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:types="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+                  xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns="http://schemas.xmlsoap.org/wsdl/" 
+                  targetNamespace="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0">
+    <wsdl:documentation>SqiTarget</wsdl:documentation>
+    <wsdl:types>
+        <xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+                    targetNamespace="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0">
+            <xsd:element name="setQueryLanguage">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="targetSessionID" type="xsd:string"/>
+                        <xsd:element name="queryLanguageID" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="setMaxQueryResults">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="targetSessionID" type="xsd:string"/>
+                        <xsd:element name="maxQueryResults" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="setMaxDuration">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="targetSessionID" type="xsd:string"/>
+                        <xsd:element name="maxDuration" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="setResultsFormat">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="targetSessionID" type="xsd:string"/>
+                        <xsd:element name="resultsFormat" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="setResultsSetSize">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="targetSessionID" type="xsd:string"/>
+                        <xsd:element name="resultsSetSize" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="synchronousQuery">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="targetSessionID" type="xsd:string"/>
+                        <xsd:element name="queryStatement" type="xsd:string"/>
+                        <xsd:element name="startResult" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="synchronousQueryResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="synchronousQueryReturn" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getTotalResultsCount">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="targetSessionID" type="xsd:string"/>
+                        <xsd:element name="queryStatement" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getTotalResultsCountResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="getTotalResultsCountReturn" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="setSourceLocation">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="targetSessionID" type="xsd:string"/>
+                        <xsd:element name="sourceLocation" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="asynchronousQuery">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="targetSessionID" type="xsd:string"/>
+                        <xsd:element name="queryStatement" type="xsd:string"/>
+                        <xsd:element name="queryID" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+        <xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+                    targetNamespace="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0">
+            <xsd:simpleType name="faultCodeType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="SQI_00000"/>
+                    <xsd:enumeration value="SQI_00001"/>
+                    <xsd:enumeration value="SQI_00002"/>
+                    <xsd:enumeration value="SQI_00003"/>
+                    <xsd:enumeration value="SQI_00004"/>
+                    <xsd:enumeration value="SQI_00005"/>
+                    <xsd:enumeration value="SQI_00006"/>
+                    <xsd:enumeration value="SQI_00007"/>
+                    <xsd:enumeration value="SQI_00008"/>
+                    <xsd:enumeration value="SQI_00009"/>
+                    <xsd:enumeration value="SQI_00010"/>
+                    <xsd:enumeration value="SQI_00011"/>
+                    <xsd:enumeration value="SQI_00012"/>
+                    <xsd:enumeration value="SQI_00013"/>
+                    <xsd:enumeration value="SQI_00014"/>
+                    <xsd:enumeration value="SQI_00015"/>
+                    <xsd:enumeration value="SQI_00016"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:element name="_SQIFault">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="sqiFaultCode" type="types:faultCodeType"/>
+                        <xsd:element name="message" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="getTotalResultsCountRequest">
+        <wsdl:part name="part1" element="types:getTotalResultsCount"/>
+    </wsdl:message>
+    <wsdl:message name="getTotalResultsCountResponse">
+        <wsdl:part name="part1" element="types:getTotalResultsCountResponse"/>
+    </wsdl:message>
+    <wsdl:message name="_SQIFault">
+        <wsdl:part name="part1" element="types:_SQIFault"/>
+    </wsdl:message>
+    <wsdl:message name="synchronousQueryRequest">
+        <wsdl:part name="part1" element="types:synchronousQuery"/>
+    </wsdl:message>
+    <wsdl:message name="synchronousQueryResponse">
+        <wsdl:part name="part1" element="types:synchronousQueryResponse"/>
+    </wsdl:message>
+    <wsdl:message name="setMaxDurationRequest">
+        <wsdl:part name="part1" element="types:setMaxDuration"/>
+    </wsdl:message>
+    <wsdl:message name="setMaxDurationResponse"/>
+    <wsdl:message name="setResultsFormatRequest">
+        <wsdl:part name="part1" element="types:setResultsFormat"/>
+    </wsdl:message>
+    <wsdl:message name="setResultsFormatResponse"/>
+    <wsdl:message name="asynchronousQueryRequest">
+        <wsdl:part name="part1" element="types:asynchronousQuery"/>
+    </wsdl:message>
+    <wsdl:message name="asynchronousQueryResponse"/>
+    <wsdl:message name="setResultsSetSizeRequest">
+        <wsdl:part name="part1" element="types:setResultsSetSize"/>
+    </wsdl:message>
+    <wsdl:message name="setResultsSetSizeResponse"/>
+    <wsdl:message name="setMaxQueryResultsRequest">
+        <wsdl:part name="part1" element="types:setMaxQueryResults"/>
+    </wsdl:message>
+    <wsdl:message name="setMaxQueryResultsResponse"/>
+    <wsdl:message name="setQueryLanguageRequest">
+        <wsdl:part name="part1" element="types:setQueryLanguage"/>
+    </wsdl:message>
+    <wsdl:message name="setQueryLanguageResponse"/>
+    <wsdl:message name="setSourceLocationRequest">
+        <wsdl:part name="part1" element="types:setSourceLocation"/>
+    </wsdl:message>
+    <wsdl:message name="setSourceLocationResponse"/>
+    <wsdl:portType name="SqiTargetPortType">
+        <wsdl:operation name="getTotalResultsCount">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                        message="types:getTotalResultsCountRequest" wsaw:Action="getTotalResultsCount"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                         message="types:getTotalResultsCountResponse"
+                         wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:getTotalResultsCountResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:_SQIFault"
+                        name="_SQIFault"
+                        wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:getTotalResultsCount:Fault:_SQIFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="synchronousQuery">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:synchronousQueryRequest"
+                        wsaw:Action="synchronousQuery"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:synchronousQueryResponse"
+                         wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:synchronousQueryResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:_SQIFault"
+                        name="_SQIFault"
+                        wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:synchronousQuery:Fault:_SQIFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="setMaxDuration">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:setMaxDurationRequest"
+                        wsaw:Action="setMaxDuration"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:setMaxDurationResponse"
+                         wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setMaxDurationResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:_SQIFault"
+                        name="_SQIFault"
+                        wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setMaxDuration:Fault:_SQIFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="setResultsFormat">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:setResultsFormatRequest"
+                        wsaw:Action="setResultsFormat"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:setResultsFormatResponse"
+                         wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setResultsFormatResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:_SQIFault"
+                        name="_SQIFault"
+                        wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setResultsFormat:Fault:_SQIFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="asynchronousQuery">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:asynchronousQueryRequest"
+                        wsaw:Action="asynchronousQuery"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                         message="types:asynchronousQueryResponse"
+                         wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:asynchronousQueryResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:_SQIFault"
+                        name="_SQIFault"
+                        wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:asynchronousQuery:Fault:_SQIFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="setResultsSetSize">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:setResultsSetSizeRequest"
+                        wsaw:Action="setResultsSetSize"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                         message="types:setResultsSetSizeResponse"
+                         wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setResultsSetSizeResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:_SQIFault"
+                        name="_SQIFault"
+                        wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setResultsSetSize:Fault:_SQIFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="setMaxQueryResults">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:setMaxQueryResultsRequest"
+                        wsaw:Action="setMaxQueryResults"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                         message="types:setMaxQueryResultsResponse"
+                         wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setMaxQueryResultsResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:_SQIFault"
+                        name="_SQIFault"
+                        wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setMaxQueryResults:Fault:_SQIFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="setQueryLanguage">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:setQueryLanguageRequest"
+                        wsaw:Action="setQueryLanguage"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:setQueryLanguageResponse"
+                         wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setQueryLanguageResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:_SQIFault"
+                        name="_SQIFault"
+                        wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setQueryLanguage:Fault:_SQIFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="setSourceLocation">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:setSourceLocationRequest"
+                        wsaw:Action="setSourceLocation"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                         message="types:setSourceLocationResponse"
+                         wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setSourceLocationResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="types:_SQIFault"
+                        name="_SQIFault"
+                        wsaw:Action="urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setSourceLocation:Fault:_SQIFault"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SqiTargetSOAP11Binding" type="types:SqiTargetPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getTotalResultsCount">
+            <soap:operation soapAction="getTotalResultsCount" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="synchronousQuery">
+            <soap:operation soapAction="synchronousQuery" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setMaxDuration">
+            <soap:operation soapAction="setMaxDuration" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setResultsFormat">
+            <soap:operation soapAction="setResultsFormat" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="asynchronousQuery">
+            <soap:operation soapAction="asynchronousQuery" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setResultsSetSize">
+            <soap:operation soapAction="setResultsSetSize" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setMaxQueryResults">
+            <soap:operation soapAction="setMaxQueryResults" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setQueryLanguage">
+            <soap:operation soapAction="setQueryLanguage" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setSourceLocation">
+            <soap:operation soapAction="setSourceLocation" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="SqiTargetSOAP12Binding" type="types:SqiTargetPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getTotalResultsCount">
+            <soap12:operation soapAction="getTotalResultsCount" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap12:fault use="literal" name="_SQIFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="synchronousQuery">
+            <soap12:operation soapAction="synchronousQuery" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap12:fault use="literal" name="_SQIFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setMaxDuration">
+            <soap12:operation soapAction="setMaxDuration" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap12:fault use="literal" name="_SQIFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setResultsFormat">
+            <soap12:operation soapAction="setResultsFormat" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap12:fault use="literal" name="_SQIFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="asynchronousQuery">
+            <soap12:operation soapAction="asynchronousQuery" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap12:fault use="literal" name="_SQIFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setResultsSetSize">
+            <soap12:operation soapAction="setResultsSetSize" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap12:fault use="literal" name="_SQIFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setMaxQueryResults">
+            <soap12:operation soapAction="setMaxQueryResults" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap12:fault use="literal" name="_SQIFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setQueryLanguage">
+            <soap12:operation soapAction="setQueryLanguage" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap12:fault use="literal" name="_SQIFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="setSourceLocation">
+            <soap12:operation soapAction="setSourceLocation" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="_SQIFault">
+                <soap12:fault use="literal" name="_SQIFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="SqiTarget">
+        <wsdl:port name="SqiTargetSOAP11port" binding="types:SqiTargetSOAP11Binding">
+            <soap:address location="http://localhost:8081/repository/services/SqiSessionManagement"/>
+        </wsdl:port>
+        <wsdl:port name="SqiTargetSOAP12port" binding="types:SqiTargetSOAP12Binding">
+            <soap12:address location="http://localhost:8081/repository/services/SqiSessionManagement"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

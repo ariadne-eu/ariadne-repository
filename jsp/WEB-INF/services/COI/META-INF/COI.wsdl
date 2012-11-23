@@ -1,0 +1,207 @@
+<wsdl:definitions xmlns:tns="urn:coi.ariadne-eu.org/interfaces/COI" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/"
+                  targetNamespace="urn:coi.ariadne-eu.org/interfaces/COI">
+    <wsdl:types>
+        <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified"
+                    targetNamespace="urn:coi.ariadne-eu.org/interfaces/COI">
+            <xsd:import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="xsd0.xsd"/>
+            <xsd:element name="getResource">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="targetSessionID" type="xsd:string"/>
+                        <xsd:element name="identifier" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getResourceResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="binaryData" type="xmime:base64Binary"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getResourceName">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="targetSessionID" type="xsd:string"/>
+                        <xsd:element name="identifier" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getResourceNameResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="name" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getResourceExtension">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="targetSessionID" type="xsd:string"/>
+                        <xsd:element name="identifier" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getResourceExtensionResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="extension" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:simpleType name="COIFaultCodeType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="COI-00000"/>
+                    <xsd:enumeration value="COI-00001"/>
+                    <xsd:enumeration value="COI-00002"/>
+                    <xsd:enumeration value="COI-00003"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:element name="COIFault">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="coiFaultCode" type="tns:COIFaultCodeType"/>
+                        <xsd:element name="message" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="getResourceRequest">
+        <wsdl:part name="part1" element="tns:getResource"/>
+    </wsdl:message>
+    <wsdl:message name="getResourceResponse">
+        <wsdl:part name="part1" element="tns:getResourceResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getResourceNameRequest">
+        <wsdl:part name="part1" element="tns:getResourceName"/>
+    </wsdl:message>
+    <wsdl:message name="getResourceNameResponse">
+        <wsdl:part name="part1" element="tns:getResourceNameResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getResourceExtensionRequest">
+        <wsdl:part name="part1" element="tns:getResourceExtension"/>
+    </wsdl:message>
+    <wsdl:message name="getResourceExtensionResponse">
+        <wsdl:part name="part1" element="tns:getResourceExtensionResponse"/>
+    </wsdl:message>
+    <wsdl:message name="COIFault">
+        <wsdl:part name="part1" element="tns:COIFault"/>
+    </wsdl:message>
+    <wsdl:portType name="COIPortType">
+        <wsdl:operation name="getResource">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:getResourceRequest"
+                        wsaw:Action="getResource"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:getResourceResponse"
+                         wsaw:Action="urn:coi.ariadne-eu.org/interfaces/COI:COIServicePortType:getResourceResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:COIFault" name="COIFault"
+                        wsaw:Action="urn:coi.ariadne-eu.org/interfaces/COI:COIServicePortType:getResource:Fault:COIFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="getResourceName">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:getResourceNameRequest"
+                        wsaw:Action="getResourceName"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:getResourceNameResponse"
+                         wsaw:Action="urn:coi.ariadne-eu.org/interfaces/COI:COIServicePortType:getResourceNameResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:COIFault" name="COIFault"
+                        wsaw:Action="urn:coi.ariadne-eu.org/interfaces/COI:COIServicePortType:getResourceName:Fault:COIFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="getResourceExtension">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:getResourceExtensionRequest"
+                        wsaw:Action="getResourceExtension"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:getResourceExtensionResponse"
+                         wsaw:Action="urn:coi.ariadne-eu.org/interfaces/COI:COIServicePortType:getResourceExtensionResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:COIFault" name="COIFault"
+                        wsaw:Action="urn:coi.ariadne-eu.org/interfaces/COI:COIServicePortType:getResourceExtension:Fault:COIFault"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="COISOAP11Binding" type="tns:COIPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getResource">
+            <soap:operation soapAction="getResource" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="COIFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getResourceName">
+            <soap:operation soapAction="getResourceName" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="COIFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getResourceExtension">
+            <soap:operation soapAction="getResourceExtension" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="COIFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="COISOAP12Binding" type="tns:COIPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getResource">
+            <soap12:operation soapAction="getResource" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="COIFault">
+                <soap12:fault use="literal" name="COIFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getResourceName">
+            <soap12:operation soapAction="getResourceName" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="COIFault">
+                <soap12:fault use="literal" name="COIFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getResourceExtension">
+            <soap12:operation soapAction="getResourceExtension" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="COIFault">
+                <soap12:fault use="literal" name="COIFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="COI">
+        <wsdl:port name="COISOAP11port_http" binding="tns:COISOAP11Binding">
+            <soap:address location="http://localhost:5050/axis2/services/COISample"/>
+        </wsdl:port>
+        <wsdl:port name="COISOAP12port_http" binding="tns:COISOAP12Binding">
+            <soap12:address location="http://localhost:5050/axis2/services/COISample"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

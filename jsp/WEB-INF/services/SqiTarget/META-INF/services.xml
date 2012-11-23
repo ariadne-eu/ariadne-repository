@@ -1,0 +1,82 @@
+<serviceGroup>
+
+    <service name="SqiTarget">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
+                             class="be.cenorm.www.SqiTargetMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter locked="false" name="ServiceClass">org.ariadne_eu.service.SqiTargetImplementation</parameter>
+        <operation name="getTotalResultsCount" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>getTotalResultsCount</actionMapping>
+            <outputActionMapping>urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:getTotalResultsCountResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="_SQIFault">
+                urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:getTotalResultsCount:Fault:_SQIFault
+            </faultActionMapping>
+        </operation>
+        <operation name="synchronousQuery" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>synchronousQuery</actionMapping>
+            <outputActionMapping>urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:synchronousQueryResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="_SQIFault">
+                urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:synchronousQuery:Fault:_SQIFault
+            </faultActionMapping>
+        </operation>
+        <operation name="setMaxDuration" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>setMaxDuration</actionMapping>
+            <outputActionMapping>urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setMaxDurationResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="_SQIFault">
+                urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setMaxDuration:Fault:_SQIFault
+            </faultActionMapping>
+        </operation>
+        <operation name="setResultsFormat" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>setResultsFormat</actionMapping>
+            <outputActionMapping>urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setResultsFormatResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="_SQIFault">
+                urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setResultsFormat:Fault:_SQIFault
+            </faultActionMapping>
+        </operation>
+        <operation name="asynchronousQuery" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>asynchronousQuery</actionMapping>
+            <outputActionMapping>urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:asynchronousQueryResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="_SQIFault">
+                urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:asynchronousQuery:Fault:_SQIFault
+            </faultActionMapping>
+        </operation>
+        <operation name="setResultsSetSize" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>setResultsSetSize</actionMapping>
+            <outputActionMapping>urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setResultsSetSizeResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="_SQIFault">
+                urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setResultsSetSize:Fault:_SQIFault
+            </faultActionMapping>
+        </operation>
+        <operation name="setMaxQueryResults" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>setMaxQueryResults</actionMapping>
+            <outputActionMapping>urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setMaxQueryResultsResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="_SQIFault">
+                urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setMaxQueryResults:Fault:_SQIFault
+            </faultActionMapping>
+        </operation>
+        <operation name="setQueryLanguage" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>setQueryLanguage</actionMapping>
+            <outputActionMapping>urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setQueryLanguageResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="_SQIFault">
+                urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setQueryLanguage:Fault:_SQIFault
+            </faultActionMapping>
+        </operation>
+        <operation name="setSourceLocation" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>setSourceLocation</actionMapping>
+            <outputActionMapping>urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setSourceLocationResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="_SQIFault">
+                urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiTargetPort:setSourceLocation:Fault:_SQIFault
+            </faultActionMapping>
+        </operation>
+    </service>
+</serviceGroup>

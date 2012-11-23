@@ -1,0 +1,243 @@
+<web-app>
+
+
+
+	<context-param>
+		<param-name>properties</param-name>
+		<param-value>../install/ariadne.properties</param-value>
+		<description>
+			The filename of the oaicat.properties file containing
+			datapairs used to initialize the OAI repository software.
+			It is supposed to be in the WEB-INF directory.
+      </description>
+	</context-param>
+	
+	<context-param>
+		<param-name>constantsClass</param-name>
+		<param-value>org.ariadne_eu.utils.config.RepositoryConstants</param-value>
+		<description>
+			The class where the constants are defined.
+      </description>
+	</context-param>
+
+	<context-param>
+		<param-name>sword-server-class</param-name>
+		<param-value>org.celstec.ariadne.app.SpiServer</param-value>
+		<description>The SPI server target</description>
+	</context-param>
+
+	<context-param>
+		<param-name>authentication-method</param-name>
+		<param-value>None</param-value>
+		<description>
+			The type of authentication used : [Basic|None]
+		</description>
+	</context-param>
+
+	<!-- Filters -->
+	<filter>
+		<filter-name>admin-only</filter-name>
+		<filter-class>org.ariadne_eu.utils.registry.auth.AdminOnlyFilter
+		</filter-class>
+	</filter>
+
+	<filter>
+		<filter-name>registered-only</filter-name>
+		<filter-class>org.ariadne_eu.utils.registry.auth.RegisteredOnlyFilter
+		</filter-class>
+	</filter>
+<!-- <filter>
+		<filter-name>admin-only</filter-name>
+		<filter-class>org.ariadne_eu.webui.filter.AdminOnlyFilter
+		</filter-class>
+	</filter>
+
+	<filter>
+		<filter-name>registered-only</filter-name>
+		<filter-class>org.ariadne_eu.webui.filter.RegisteredOnlyFilter
+		</filter-class>
+	</filter> -->	
+
+	<!-- Filter mappings -->
+	
+	<filter-mapping>
+		<filter-name>registered-only</filter-name>
+		<url-pattern>/form/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>registered-only</filter-name>
+		<url-pattern>/admin-ariadne-registry/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>admin-only</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>
+
+
+	<filter-mapping>
+		<filter-name>admin-only</filter-name>
+		<url-pattern>/insert/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>admin-only</filter-name>
+		<url-pattern>/obtain/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>registered-only</filter-name>
+		<url-pattern>/status/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>admin-only</filter-name>
+		<url-pattern>/init/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>admin-only</filter-name>
+		<url-pattern>/registryMgmt/*</url-pattern>
+	</filter-mapping>
+
+
+	<!-- Servlets -->
+
+	<servlet>
+        <servlet-name>openid</servlet-name>
+        <servlet-class>org.ariadne_eu.utils.registry.auth.OpenIdServlet</servlet-class>
+    </servlet>
+    
+	<servlet>
+		<servlet-name>InitServlet</servlet-name>
+		<display-name>Initialisation Servlet</display-name>
+		<!--servlet-class>org.ariadne.config.InitServlet</servlet-class-->
+		<servlet-class>org.ariadne_eu.utils.config.servlets.InitServlet
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>log4j-init</servlet-name>
+		<servlet-class>org.ariadne_eu.utils.config.servlets.Log4jInit
+		</servlet-class>
+		<load-on-startup>15</load-on-startup>
+		<init-param>
+			<param-name>log4j-init-file</param-name>
+			<param-value>log.properties</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<servlet-name>OAIHandler</servlet-name>
+		<description>
+			This servlet processes OAI verbs.
+
+			The initialization
+			parameter names for this servlet are the
+			"servlet path" that will be
+			received by this servlet (after the
+			filename extension is removed).
+			The corresponding value is the
+			name of the action class that will be
+			used to process this request.
+		</description>
+		<servlet-class>org.ariadne.oai.server.OAIHandler</servlet-class>
+		<!-- Load this servlet at server startup time -->
+		<load-on-startup>20</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>AxisServlet</servlet-name>
+		<display-name>Apache-Axis Servlet</display-name>
+		<servlet-class>
+			org.apache.axis2.transport.http.AxisServlet
+		</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>servicedocument</servlet-name>
+		<servlet-class>org.purl.sword.server.ServiceDocumentServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>deposit</servlet-name>
+		<servlet-class>org.celstec.ariadne.app.DepositServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>Jersey</servlet-name>
+		<servlet-class>
+			com.sun.jersey.spi.container.servlet.ServletContainer
+		</servlet-class>
+		<load-on-startup>10</load-on-startup>
+	</servlet>
+	
+	<servlet>
+        <description>This is the description of my J2EE component</description>
+        <display-name>This is the display name of my J2EE component</display-name>
+        <servlet-name>DownloadResourceServlet</servlet-name>
+        <servlet-class>org.ariadne_eu.servlets.DownloadResourceServlet</servlet-class>
+    </servlet>
+
+	<!-- Servlet Mappings -->
+
+	<servlet-mapping>
+		<servlet-name>openid</servlet-name>
+		<url-pattern>/auth/openid</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>OAIHandler</servlet-name>
+		<url-pattern>/services/oai</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>Jersey</servlet-name>
+		<url-pattern>/api/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>/services/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>servicedocument</servlet-name>
+		<url-pattern>/app/servicedocument</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>deposit</servlet-name>
+		<url-pattern>/deposit/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+        <servlet-name>DownloadResourceServlet</servlet-name>
+        <url-pattern>/download</url-pattern>
+    </servlet-mapping>
+
+	<session-config>
+		<session-timeout>30</session-timeout>    <!-- 30 minutes -->
+	</session-config>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Protected Area</web-resource-name>
+			<url-pattern>/install/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<login-config>
+		<auth-method>BASIC</auth-method>
+	</login-config>
+
+	<security-role>
+		<role-name>admin</role-name>
+	</security-role>
+
+</web-app>

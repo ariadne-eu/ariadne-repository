@@ -1,0 +1,35 @@
+<serviceGroup>
+
+    <service name="COI">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
+                             class="org.ariadne_eu.coi.COIMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter locked="false" name="ServiceClass">org.ariadne_eu.service.COIImplementation</parameter>
+        <operation name="getResource" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>getResource</actionMapping>
+            <outputActionMapping>urn:coi.ariadne-eu.org/interfaces/COI:COIServicePortType:getResourceResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="CoiFault">
+                urn:coi.ariadne-eu.org/interfaces/COI:COIServicePortType:getResource:Fault:CoiFault
+            </faultActionMapping>
+        </operation>
+        <operation name="getResourceName" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>getResourceName</actionMapping>
+            <outputActionMapping>urn:coi.ariadne-eu.org/interfaces/COI:COIServicePortType:getResourceNameResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="CoiFault">
+                urn:coi.ariadne-eu.org/interfaces/COI:COIServicePortType:getResource:Fault:CoiFault
+            </faultActionMapping>
+        </operation>
+        <operation name="getResourceExtension" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>getResourceExtension</actionMapping>
+            <outputActionMapping>urn:coi.ariadne-eu.org/interfaces/COI:COIServicePortType:getResourceExtensionResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="CoiFault">
+                urn:coi.ariadne-eu.org/interfaces/COI:COIServicePortType:getResource:Fault:CoiFault
+            </faultActionMapping>
+        </operation>
+    </service>
+
+</serviceGroup>

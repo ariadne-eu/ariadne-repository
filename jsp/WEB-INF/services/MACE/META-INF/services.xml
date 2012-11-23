@@ -1,0 +1,44 @@
+<serviceGroup>
+	<service name="MACE">
+		<messageReceivers>
+			<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out" class="org.ariadne_eu.mace.MACEMessageReceiverInOut" />
+		</messageReceivers>
+		<parameter locked="false" name="ServiceClass">org.ariadne_eu.service.MACEImplementation</parameter>
+		<operation name="removeRelation" mep="http://www.w3.org/2004/08/wsdl/in-out">
+			<actionMapping>removeRelation</actionMapping>
+			<outputActionMapping>urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:removeRelationResponse</outputActionMapping>
+			<faultActionMapping faultName="MACEFault">
+			urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:removeRelation:Fault:MACEFault</faultActionMapping>
+		</operation>
+		<operation name="createRWO" mep="http://www.w3.org/2004/08/wsdl/in-out">
+			<actionMapping>createRWO</actionMapping>
+			<outputActionMapping>urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:createRWOResponse</outputActionMapping>
+			<faultActionMapping faultName="MACEFault">
+			urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:createRWO:Fault:MACEFault</faultActionMapping>
+		</operation>
+		<operation name="createLOM" mep="http://www.w3.org/2004/08/wsdl/in-out">
+			<actionMapping>createLOM</actionMapping>
+			<outputActionMapping>urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:createLOMResponse</outputActionMapping>
+			<faultActionMapping faultName="MACEFault">
+			urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:createLOM:Fault:MACEFault</faultActionMapping>
+		</operation>
+		<operation name="addRelation" mep="http://www.w3.org/2004/08/wsdl/in-out">
+			<actionMapping>addRelation</actionMapping>
+			<outputActionMapping>urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:addRelationResponse</outputActionMapping>
+			<faultActionMapping faultName="MACEFault">
+			urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:addRelation:Fault:MACEFault</faultActionMapping>
+		</operation>
+		<operation name="getRelations" mep="http://www.w3.org/2004/08/wsdl/in-out">
+			<actionMapping>getRelations</actionMapping>
+			<outputActionMapping>urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:getRelationsResponse</outputActionMapping>
+			<faultActionMapping faultName="MACEFault">
+			urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:getRelations:Fault:MACEFault</faultActionMapping>
+		</operation>
+		<operation name="enrichFromAloe" mep="http://www.w3.org/2004/08/wsdl/in-out">
+			<actionMapping>enrichFromAloe</actionMapping>
+			<outputActionMapping>urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:enrichFromAloeResponse</outputActionMapping>
+			<faultActionMapping faultName="MACEFault">
+			urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:enrichFromAloe:Fault:MACEFault</faultActionMapping>
+		</operation>
+	</service>
+</serviceGroup>

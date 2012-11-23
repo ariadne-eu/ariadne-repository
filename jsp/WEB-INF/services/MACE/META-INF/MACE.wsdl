@@ -1,0 +1,369 @@
+<wsdl:definitions xmlns:tns="urn:mace.ariadne-eu.org/interfaces/MACE"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+	xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	targetNamespace="urn:mace.ariadne-eu.org/interfaces/MACE">
+	<wsdl:documentation>MACE</wsdl:documentation>
+	<wsdl:types>
+		<xs:schema attributeFormDefault="qualified" elementFormDefault="qualified"
+			targetNamespace="urn:mace.ariadne-eu.org/interfaces/MACE">
+			<xs:element name="createRWO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="resourceId" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="resourceTitle" nillable="true"
+							type="xs:string"/>
+						<xs:element minOccurs="0" name="resourceDescription" nillable="true"
+						type="xs:string"/>
+						<xs:element minOccurs="0" name="resourceLanguage" nillable="true"
+							type="xs:string"/>
+						<xs:element minOccurs="0" name="resourceType" nillable="true"
+							type="xs:string"/>
+						<xs:element minOccurs="0" name="contributorVCard" nillable="true"
+						type="xs:string"/>
+						
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="createLOM">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="resourceId" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="resourceTitle" nillable="true"
+							type="xs:string"/>
+						<xs:element minOccurs="0" name="resourceDescription" nillable="true"
+						type="xs:string"/>
+						<xs:element minOccurs="0" name="resourceLanguage" nillable="true"
+							type="xs:string"/>
+						<xs:element minOccurs="0" name="url" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="resourceType" nillable="true"
+							type="xs:string"/>
+						<xs:element minOccurs="0" name="contributorVCard" nillable="true"
+							type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="addRelation">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="fromResourceId" type="xs:string"/>
+						<xs:element minOccurs="0" name="toResourceId" type="xs:string"/>
+						<xs:element minOccurs="0" name="relationType" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="removeRelation">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="fromResourceId" type="xs:string"/>
+						<xs:element minOccurs="0" name="toResourceId" type="xs:string"/>
+						<xs:element minOccurs="0" name="relationType" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getRelations">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="resourceId" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getRelationsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="enrichFromAloe">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+						<xs:element minOccurs="0" name="resourceId" nillable="true" type="xs:string"
+						/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:simpleType name="MACEFaultCodeType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="MACE-00000"/>
+					<xs:enumeration value="MACE-00001"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:element name="MACEFault">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="maceFaultCode" type="tns:MACEFaultCodeType"/>
+						<xs:element name="message" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="removeRelationRequest">
+		<wsdl:part name="part1" element="tns:removeRelation"/>
+	</wsdl:message>
+	<wsdl:message name="removeRelationResponse"/>
+	<wsdl:message name="createRWORequest">
+		<wsdl:part name="part1" element="tns:createRWO"/>
+	</wsdl:message>
+	<wsdl:message name="createRWOResponse"/>
+	<wsdl:message name="createLOMRequest">
+		<wsdl:part name="part1" element="tns:createLOM"/>
+	</wsdl:message>
+	<wsdl:message name="createLOMResponse"/>
+	<wsdl:message name="addRelationRequest">
+		<wsdl:part name="part1" element="tns:addRelation"/>
+	</wsdl:message>
+	<wsdl:message name="addRelationResponse"/>
+	<wsdl:message name="getRelationsRequest">
+		<wsdl:part name="part1" element="tns:getRelations"/>
+	</wsdl:message>
+	<wsdl:message name="getRelationsResponse">
+		<wsdl:part name="part1" element="tns:getRelationsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="enrichFromAloeRequest">
+		<wsdl:part name="part1" element="tns:enrichFromAloe"/>
+	</wsdl:message>
+	<wsdl:message name="enrichFromAloeResponse"/>
+	<wsdl:message name="MACEFault">
+		<wsdl:part name="part1" element="tns:MACEFault"/>
+	</wsdl:message>
+	<wsdl:portType name="MACEPortType">
+		<wsdl:operation name="removeRelation">
+			<wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				message="tns:removeRelationRequest" wsaw:Action="removeRelation"/>
+			<wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				message="tns:removeRelationResponse"
+				wsaw:Action="urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:removeRelationResponse"/>
+			<wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				message="tns:MACEFault" name="MACEFault"
+				wsaw:Action="urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:removeRelation:Fault:MACEFault"
+			/>
+		</wsdl:operation>
+		<wsdl:operation name="createRWO">
+			<wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				message="tns:createRWORequest" wsaw:Action="createRWO"/>
+			<wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				message="tns:createRWOResponse"
+				wsaw:Action="urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:createRWOResponse"/>
+			<wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				message="tns:MACEFault" name="MACEFault"
+				wsaw:Action="urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:createRWO:Fault:MACEFault"
+			/>
+		</wsdl:operation>
+		<wsdl:operation name="createLOM">
+			<wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				message="tns:createLOMRequest" wsaw:Action="createLOM"/>
+			<wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				message="tns:createLOMResponse"
+				wsaw:Action="urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:createLOMResponse"/>
+			<wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				message="tns:MACEFault" name="MACEFault"
+				wsaw:Action="urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:createLOM:Fault:MACEFault"
+			/>
+		</wsdl:operation>
+		<wsdl:operation name="addRelation">
+			<wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				message="tns:addRelationRequest" wsaw:Action="addRelation"/>
+			<wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				message="tns:addRelationResponse"
+				wsaw:Action="urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:addRelationResponse"/>
+			<wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				message="tns:MACEFault" name="MACEFault"
+				wsaw:Action="urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:addRelation:Fault:MACEFault"
+			/>
+		</wsdl:operation>
+		<wsdl:operation name="getRelations">
+			<wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				message="tns:getRelationsRequest" wsaw:Action="getRelations"/>
+			<wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				message="tns:getRelationsResponse"
+				wsaw:Action="urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:getRelationsResponse"/>
+			<wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				message="tns:MACEFault" name="MACEFault"
+				wsaw:Action="urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:getRelations:Fault:MACEFault"
+			/>
+		</wsdl:operation>
+		<wsdl:operation name="enrichFromAloe">
+			<wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				message="tns:enrichFromAloeRequest" wsaw:Action="enrichFromAloe"/>
+			<wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				message="tns:enrichFromAloeResponse"
+				wsaw:Action="urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:enrichFromAloeResponse"/>
+			<wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+				message="tns:MACEFault" name="MACEFault"
+				wsaw:Action="urn:mace.ariadne-eu.org/interfaces/MACE:MACEServicePortType:enrichFromAloe:Fault:MACEFault"
+			/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="MACESOAP11Binding" type="tns:MACEPortType">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+		<wsdl:operation name="removeRelation">
+			<soap:operation soapAction="removeRelation" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="MACEFault">
+				<soap:body use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="createRWO">
+			<soap:operation soapAction="createRWO" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="MACEFault">
+				<soap:body use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="createLOM">
+			<soap:operation soapAction="createLOM" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="MACEFault">
+				<soap:body use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="addRelation">
+			<soap:operation soapAction="addRelation" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="MACEFault">
+				<soap:body use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getRelations">
+			<soap:operation soapAction="getRelations" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="MACEFault">
+				<soap:body use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="enrichFromAloe">
+			<soap:operation soapAction="enrichFromAloe" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="MACEFault">
+				<soap:body use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="MACESOAP12Binding" type="tns:MACEPortType">
+		<soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+		<wsdl:operation name="removeRelation">
+			<soap12:operation soapAction="removeRelation" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="MACEFault">
+				<soap12:fault use="literal" name="MACEFault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="createRWO">
+			<soap12:operation soapAction="createRWO" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="MACEFault">
+				<soap12:fault use="literal" name="MACEFault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="createLOM">
+			<soap12:operation soapAction="createLOM" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="MACEFault">
+				<soap12:fault use="literal" name="MACEFault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="addRelation">
+			<soap12:operation soapAction="addRelation" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="MACEFault">
+				<soap12:fault use="literal" name="MACEFault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getRelations">
+			<soap12:operation soapAction="getRelations" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="MACEFault">
+				<soap12:fault use="literal" name="MACEFault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="enrichFromAloe">
+			<soap12:operation soapAction="enrichFromAloe" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="MACEFault">
+				<soap12:fault use="literal" name="MACEFault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="MACE">
+		<wsdl:port name="MACESOAP11port_http" binding="tns:MACESOAP11Binding">
+			<soap:address location="http://localhost:8081/repository/services/MACE"/>
+		</wsdl:port>
+		<wsdl:port name="MACESOAP12port_http" binding="tns:MACESOAP12Binding">
+			<soap12:address location="http://localhost:8081/repository/services/MACE"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

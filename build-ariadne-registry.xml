@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="repository" default="usage">
+	<property file="build.properties" />
+
+	<!-- Compiler options -->
+	<property name="compiler.debug" value="on" />
+	<property name="compiler.generate.no.warnings" value="off" />
+	<property name="compiler.args" value="" />
+	<property name="compiler.max.memory" value="128m" />
+    <property name="compiler.args.core" value="${compiler.args}" />
+    <property name="output.classes" value="${output.basedir}/classes/" />
+    <property name="output.javadoc" value="${output.basedir}/javadoc/" />
+    <property name="output.zips" value="${output.basedir}/download/zips/" />
+    <patternset id="ignored.files">
+		<exclude name="**/CVS/**" />
+		<exclude name="**/SCCS/**" />
+		<exclude name="**/RCS/**" />
+		<exclude name="**/rcs/**" />
+		<exclude name="**/.DS_Store/**" />
+		<exclude name="**/.svn/**" />
+	</patternset>
+	<patternset id="compiler.resources">
+		<include name="**/?*.properties" />
+		<include name="**/?*.xml" />
+		<include name="**/?*.gif" />
+		<include name="**/?*.png" />
+		<include name="**/?*.jpeg" />
+		<include name="**/?*.jpg" />
+		<include name="**/?*.html" />
+		<include name="**/?*.dtd" />
+		<include name="**/?*.tld" />
+		<include name="**/?*.zip" />
+        <include name="**/?*.txt" />
+        <!--<include name="**/?*.wsdd" />-->
+	</patternset>
+
+	<!-- Global Libraries -->
+    <path id="project.classpath">
+        <!-- Own libs -->
+        <fileset dir="${libs}">
+            <include name="**/*.jar"/>
+        </fileset>
+    	<fileset dir="${tomcatLibs}">
+    	    <include name="**/servlet-api.jar"/>
+    	</fileset>
+    </path>
+	<path id="bootclasspath">
+		<!--<pathelement location="src" />-->
+	</path>
+
+    <target name="usage" description="Display usage information.">
+        <echo message="" />
+        <echo message="${ant.project.name} build file" />
+        <echo message="-----------------------------------" />
+        <echo message="" />
+        <echo message="  Execute 'ant -projecthelp' for help on this build file (ie: see the available targets)." />
+        <echo message="  Execute 'ant -help' for Ant help." />
+        <echo message="" />
+    </target>
+
+    <target name="clean" description="Cleanup.">
+        <!-- First try to make the directory, because otherwise the delete won't work -->
+        <mkdir dir="${output.basedir}" />
+        <echo message="Deleting the contents of the outputdir (=${output.basedir})"/>
+        <delete includeemptydirs="true">
+            <fileset dir="${output.basedir}" includes="**/*">
+                <exclude name="**/CVS/**"/>
+                <exclude name="**/SVN/**"/>
+                <exclude name="**/.svn/**"/>
+            </fileset>
+        </delete>
+    </target>
+
+    <target name="compile" description="Compile all code.">
+		<!-- Compile -->
+		<echo>Building</echo>
+		<mkdir dir="${output.basedir}" />
+		<mkdir dir="${output.classes}" />
+        <javac destdir="${output.classes}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memoryMaximumSize="${compiler.max.memory}" fork="true" target="1.5">
+			<compilerarg line="${compiler.args}" />
+			<bootclasspath refid="bootclasspath" />
+			<classpath refid="project.classpath" />
+			<src path="src" />
+		</javac>
+    	<!-- Copy some necessary file (eg .properties files) -->
+    	<copy todir="${output.classes}">
+    		<fileset dir="src">
+    			<patternset refid="compiler.resources" />
+    			<type type="file" />
+    		</fileset>
+    	</copy>
+    	<copy todir="${output.basedir}/jsp/">
+    		<fileset dir="jsp"/>
+    	</copy>
+		<delete file="${output.basedir}/jsp/search/index.jsp" />
+		<delete file="${output.basedir}/jsp/admin/updateMetadata.jsp" />
+    	<delete file="${output.basedir}/jsp/layout/header.jsp" />
+    	<delete file="${output.basedir}/jsp/layout/footer.jsp" />
+    	<delete file="${output.basedir}/jsp/WEB-INF/web.xml" />
+		<copy file="${output.basedir}/jsp/search-registry/index.jsp" todir="${output.basedir}/jsp/search/"/>
+    	<copy file="${output.basedir}/jsp/search-registry/showMetadata.jsp" todir="${output.basedir}/jsp/search/"/>
+    	<copy file="${output.basedir}/jsp/layout-ariadne-registry/header.jsp" todir="${output.basedir}/jsp/layout/"/>
+    	<copy file="${output.basedir}/jsp/layout-registry/footer.jsp" todir="${output.basedir}/jsp/layout/"/>
+    	<copy file="${output.basedir}/jsp/index-registry/index.jsp" todir="${output.basedir}/jsp/"/>
+    	<copy file="${output.basedir}/jsp/WEB-INF-ariadne-registry/web.xml" todir="${output.basedir}/jsp/WEB-INF/"/>
+		<delete dir="${output.basedir}/jsp/search-registry" />
+		<delete dir="${output.basedir}/jsp/admin-registry" />
+    	<delete dir="${output.basedir}/jsp/layout-registry" />
+    	<delete dir="${output.basedir}/jsp/layout-ariadne-registry" />
+    	<delete dir="${output.basedir}/jsp/index-registry" />
+    	<delete dir="${output.basedir}/jsp/WEB-INF-ariadne-registry" />
+	</target>
+
+
+	<target name="makeJar" description="Create the jar-files.">
+        <mkdir dir="${output.basedir}/jar/" />
+		<echo message="The jars will be put in ${output.basedir}/jar/" />
+        <jar destfile="${output.basedir}/jar/${output.jarname}.jar" basedir="${output.classes}">
+			<include name="org/**"/>
+        </jar>
+    </target>
+	
+	<!--copy todir="${output.basedir}/jar/dist/" filtering="no">
+		<mkdir dir="${output.basedir}/jar/dist/" />
+	      <fileset dir="jsp">
+	        <include name="**"/>
+	      </fileset>
+	</copy-->
+	
+
+    <target name="makeWar" description="Buildwar-file">
+        <mkdir dir="${war.output.dir}/" />
+        <war destfile="${war.output.dir}/${war.output.name}.war" webxml="${output.basedir}/jsp/WEB-INF/web.xml">
+            <!-- WEB-INF from WSDL and config files-->
+        	<webinf dir="${output.basedir}/jsp/WEB-INF/"/>
+            <!-- Own jar -->
+        	<!--<lib dir="${output.basedir}/jar">
+                <include name="**/*.jar"/>
+            </lib> -->
+            <!-- Own libs -->
+            <lib dir="${libs}">
+                <include name="**/*.jar"/>
+            	<exclude name="db2jcc_license_cisuz.jar"/>
+            	<exclude name="db2jcc_license_cu.jar"/>
+            	<exclude name="db2jcc.jar"/>
+            </lib>
+        	<!-- own properties file -->
+        	<classes dir="${output.classes}">
+        		<include name="be/**" />
+        		<include name="org/**" />
+        		<include name="net/**" />
+        		<include name="translator/**" />
+        		<include name="**/*.properties" />
+			</classes>
+        	<fileset dir="${output.basedir}/jsp"/>					
+        </war>
+    </target>
+
+    <target name="deploy" description="Deploy application as a WAR file.">
+        <!--First delete the exploded directory in the webapps-->
+        <delete dir="${war.webserver.deploypath}/${war.output.name}" />
+        <copy todir="${war.webserver.deploypath}" preservelastmodified="true">
+			<fileset dir="${war.output.dir}">
+				<include name="*.war" />
+			</fileset>
+		</copy>
+	</target>
+
+    <target name="buildall_testing"
+            depends="clean, compile, makeJar, makeWar"
+            description="Build all for test version (compile, make jar without generating javadoc)." />
+    <target name="allfresh_testing"
+            depends="clean, buildall_testing, deploy"
+            description="Cleanup and build all for test version." />
+	
+	<target name="buildAppExtension" depends="compile">
+			<mkdir dir="${output.basedir}/jar/" />
+			<jar destfile="${output.basedir}/jar/appSpiAriadneTarget.jar" basedir="${output.classes}" 
+				includes="org/oclc/** org/celstec/ariadne/app/**" />
+			<!--jar destfile="${output.basedir}/jar/appSpiAriadneTarget.jar" basedir="${output.classes}" 
+						includes="org/oclc/** org/purl/** org/celstec/ariadne/app/** org/w3/atom/**" /> -->
+			<copy todir="/Sandbox/app/apache-tomcat-5.5.26/webapps/repository/WEB-INF/lib" 
+				filtering="no" file="${output.basedir}/jar/appSpiAriadneTarget.jar">
+
+			</copy>
+	</target>
+
+
+</project>

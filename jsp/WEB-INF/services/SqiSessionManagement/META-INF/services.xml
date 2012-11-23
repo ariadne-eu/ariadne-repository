@@ -1,0 +1,35 @@
+<serviceGroup>
+    <service name="SqiSessionManagement">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out" class="be.cenorm.www.SqiSessionManagementMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter locked="false" name="ServiceClass">org.ariadne_eu.service.SqiSessionManagementImplementation</parameter>
+        <operation name="createSession" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>createSession</actionMapping>
+            <outputActionMapping>urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiSessionManagementPort:createSessionResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="_SQIFault">
+                urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiSessionManagementPort:createSession:Fault:_SQIFault
+            </faultActionMapping>
+        </operation>
+        <operation name="destroySession" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>destroySession</actionMapping>
+            <outputActionMapping>
+                urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiSessionManagementPort:destroySessionResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="_SQIFault">
+                urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiSessionManagementPort:destroySession:Fault:_SQIFault
+            </faultActionMapping>
+        </operation>
+        <operation name="createAnonymousSession" mep="http://www.w3.org/2004/08/wsdl/in-out">
+            <actionMapping>createAnonymousSession</actionMapping>
+            <outputActionMapping>
+                urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiSessionManagementPort:createAnonymousSessionResponse
+            </outputActionMapping>
+            <faultActionMapping faultName="_SQIFault">
+                urn:www.cenorm.be/isss/ltws/wsdl/SQIv1p0:SqiSessionManagementPort:createAnonymousSession:Fault:_SQIFault
+            </faultActionMapping>
+        </operation>
+    </service>
+
+</serviceGroup>

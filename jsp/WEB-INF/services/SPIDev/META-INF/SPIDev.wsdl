@@ -1,0 +1,280 @@
+<wsdl:definitions xmlns:tns="urn:spidev.ariadne-eu.org/interfaces/SPIDev" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/"
+                  targetNamespace="urn:spidev.ariadne-eu.org/interfaces/SPIDev">
+    <wsdl:types>
+        <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified"
+                    targetNamespace="urn:spidev.ariadne-eu.org/interfaces/SPIDev">
+            <xsd:import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="xsd0.xsd"/>
+            <xsd:element name="createIdentifier">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="targetSessionID" type="xsd:string"/>
+                        <xsd:element name="catalog" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="createIdentifierResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="localIdentifier" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="submitResource">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="targetSessionID" type="xsd:string"/>
+                        <xsd:element name="globalIdentifier" type="xsd:string"/>
+                        <xsd:element name="binaryData" type="xmime:base64Binary"/>
+                        <xsd:element name="fileName" type="xsd:string"/>
+                        <xsd:element name="fileType" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="submitMetadataRecord">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="targetSessionID" type="xsd:string"/>
+                        <xsd:element name="globalIdentifier" type="xsd:string"/>
+                        <xsd:element name="metadata" type="xsd:string"/>
+                        <xsd:element name="collection" type="xsd:string" use="optional"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="deleteMetadataRecord">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="targetSessionID" type="xsd:string"/>
+                        <xsd:element name="globalIdentifier" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="deleteResource">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="targetSessionID" type="xsd:string"/>
+                        <xsd:element name="globalIdentifier" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:simpleType name="faultCodeType">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="SPIDev_00000"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:element name="SpiDevFault">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="spiDevFaultCode" type="tns:faultCodeType"/>
+                        <xsd:element name="message" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="deleteResourceRequest">
+        <wsdl:part name="part1" element="tns:deleteResource"/>
+    </wsdl:message>
+    <wsdl:message name="deleteResourceResponse"/>
+    <wsdl:message name="SpiDevFault">
+        <wsdl:part name="part1" element="tns:SpiDevFault"/>
+    </wsdl:message>
+    <wsdl:message name="deleteMetadataRecordRequest">
+        <wsdl:part name="part1" element="tns:deleteMetadataRecord"/>
+    </wsdl:message>
+    <wsdl:message name="submitMetadataRecordResponse"/>
+    <wsdl:message name="createIdentifierRequest">
+        <wsdl:part name="part1" element="tns:createIdentifier"/>
+    </wsdl:message>
+    <wsdl:message name="createIdentifierResponse">
+        <wsdl:part name="part1" element="tns:createIdentifierResponse"/>
+    </wsdl:message>
+    <wsdl:message name="submitResourceRequest">
+        <wsdl:part name="part1" element="tns:submitResource"/>
+    </wsdl:message>
+    <wsdl:message name="submitResourceResponse"/>
+    <wsdl:message name="submitMetadataRecordRequest">
+        <wsdl:part name="part1" element="tns:submitMetadataRecord"/>
+    </wsdl:message>
+    <wsdl:portType name="SPIDevPortType">
+        <wsdl:operation name="deleteResource">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:deleteResourceRequest"
+                        wsaw:Action="deleteResource"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:deleteResourceResponse"
+                         wsaw:Action="urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:deleteResourceResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:SpiDevFault" name="SpiDevFault"
+                        wsaw:Action="urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:deleteResource:Fault:SpiDevFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteMetadataRecord">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:deleteMetadataRecordRequest"
+                        wsaw:Action="deleteMetadataRecord"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                         message="tns:submitMetadataRecordResponse"
+                         wsaw:Action="urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:deleteMetadataRecordResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:SpiDevFault" name="SpiDevFault"
+                        wsaw:Action="urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:deleteMetadataRecord:Fault:SpiDevFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="createIdentifier">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:createIdentifierRequest"
+                        wsaw:Action="createIdentifier"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:createIdentifierResponse"
+                         wsaw:Action="urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:createIdentifierResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:SpiDevFault" name="SpiDevFault"
+                        wsaw:Action="urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:createIdentifier:Fault:SpiDevFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="submitResource">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:submitResourceRequest"
+                        wsaw:Action="submitResource"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:submitResourceResponse"
+                         wsaw:Action="urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:submitResourceResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:SpiDevFault" name="SpiDevFault"
+                        wsaw:Action="urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:submitResource:Fault:SpiDevFault"/>
+        </wsdl:operation>
+        <wsdl:operation name="submitMetadataRecord">
+            <wsdl:input xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:submitMetadataRecordRequest"
+                        wsaw:Action="submitMetadataRecord"/>
+            <wsdl:output xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                         message="tns:submitMetadataRecordResponse"
+                         wsaw:Action="urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:submitMetadataRecordResponse"/>
+            <wsdl:fault xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" message="tns:SpiDevFault" name="SpiDevFault"
+                        wsaw:Action="urn:spidev.ariadne-eu.org/interfaces/SPIDev:SPIDevServicePortType:submitMetadataRecord:Fault:SpiDevFault"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SPIDevSOAP11Binding" type="tns:SPIDevPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="deleteResource">
+            <soap:operation soapAction="deleteResource" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SpiDevFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="deleteMetadataRecord">
+            <soap:operation soapAction="deleteMetadataRecord" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SpiDevFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="createIdentifier">
+            <soap:operation soapAction="createIdentifier" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SpiDevFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="submitResource">
+            <soap:operation soapAction="submitResource" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SpiDevFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="submitMetadataRecord">
+            <soap:operation soapAction="submitMetadataRecord" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SpiDevFault">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="SPIDevSOAP12Binding" type="tns:SPIDevPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="deleteResource">
+            <soap12:operation soapAction="deleteResource" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SpiDevFault">
+                <soap12:fault use="literal" name="SpiDevFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="deleteMetadataRecord">
+            <soap12:operation soapAction="deleteMetadataRecord" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SpiDevFault">
+                <soap12:fault use="literal" name="SpiDevFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="createIdentifier">
+            <soap12:operation soapAction="createIdentifier" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SpiDevFault">
+                <soap12:fault use="literal" name="SpiDevFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="submitResource">
+            <soap12:operation soapAction="submitResource" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SpiDevFault">
+                <soap12:fault use="literal" name="SpiDevFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="submitMetadataRecord">
+            <soap12:operation soapAction="submitMetadataRecord" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SpiDevFault">
+                <soap12:fault use="literal" name="SpiDevFault"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="SPIDev">
+        <wsdl:port name="SPIDevSOAP11port_http" binding="tns:SPIDevSOAP11Binding">
+            <soap:address location="http://localhost:5050/axis2/services/SPIDev"/>
+        </wsdl:port>
+        <wsdl:port name="SPIDevSOAP12port_http" binding="tns:SPIDevSOAP12Binding">
+            <soap12:address location="http://localhost:5050/axis2/services/SPIDev"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
